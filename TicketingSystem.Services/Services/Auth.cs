@@ -14,11 +14,11 @@ namespace TicketingSystem.Services.Services
     public class Auth : IAuth
     {
 
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JWT _jwt;
 
-        public Auth(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
+        public Auth(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -51,7 +51,7 @@ namespace TicketingSystem.Services.Services
             return authModel;
         }
 
-        private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
+        private async Task<JwtSecurityToken> CreateJwtToken(User user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);

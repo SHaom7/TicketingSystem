@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using TicketingSystem.Data.Data;
 using TicketingSystem.Data.IServices;
 using TicketingSystem.Data.Models;
 using TicketingSystem.Services.Helper;
@@ -17,7 +18,7 @@ builder.Services.AddScoped<IAuth, Auth>();
 
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
